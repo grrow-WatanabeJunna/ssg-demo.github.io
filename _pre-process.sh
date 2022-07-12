@@ -5,22 +5,18 @@
 
 cd "$(dirname "${BASH_SOURCE:-$0}")" || exit
 
-mv _next next
+if [ -d _next ]; then
+  mv _next next
+fi
 
 while read -r path; do
-  begin_with_underscore="$(grep '/_' "${path}")"
+  begin_with_underscore="$(echo "${path}" | grep '/_')"
 
   if [ -n "${begin_with_underscore}" ]; then
-    correct_path="(echo ${path} | sed s/\\/_/\\//g )"
+    correct_path="$(echo "${path}" | sed s/\\/_/\\//g )"
 
     mv "${path}" "${correct_path}" 
 
-    sed -i index.html 's#'"${path}"'#'"${correct_path}"'#g'
+    sed -i index.html -e 's#'"${path}"'#'"${correct_path}"'#g'
   fi
 done < <(find next -mindepth 1)
-
-function escape_slash() {
-  readonly _VALUE=$1
-
-  echo "${_VALUE}" | sed s/\\//\\\\\\//g
-}
