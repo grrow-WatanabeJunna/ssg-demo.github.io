@@ -4,7 +4,8 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      ssg demo is working!
+      <p>ssg demo is working!</p>
+      <p>レッドブルうめー</p>
     </div>
   )
 }
