@@ -6,6 +6,7 @@
 cd "$(dirname "${BASH_SOURCE:-$0}")" || exit
 
 if [ -d _next ]; then
+  rm -rf next
   mv _next next
 fi
 
