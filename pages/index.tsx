@@ -6,6 +6,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <p>ssg demo is working!</p>
       <p>レッドブルうめー</p>
+      <p>imouto lazer</p>
     </div>
   )
 }
