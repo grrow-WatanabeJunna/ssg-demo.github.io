@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 #
 # description:
-#   correct directory or file name that begins with the underscore.
+#   Among the files pushed to GitHub, files whose file name starts with underscore are not viewable in GitHub Pages.
+#
+#   To solve the above problem, this script does the following two things
+#
+#   1. fix directory or file name that begins with the underscore.
+#   2. Fix paths to JS, CSS files described in HTML files
 
 readonly ORIGINAL_ASSETS_DIRECTORY=_next
 readonly CORRECT_ASSETS_DIRECTORY=next
