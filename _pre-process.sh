@@ -3,12 +3,10 @@
 # description:
 #   correct directory or file name that begins with the underscore.
 
-set -x
-
-readonly PAGE=index.html
-readonly BACKUP_PREFIX=.tmp
 readonly ORIGINAL_ASSETS_DIRECTORY=_next
 readonly CORRECT_ASSETS_DIRECTORY=next
+readonly PAGE=index.html
+readonly BACKUP_PREFIX=.tmp
 
 cd "$(dirname "${BASH_SOURCE:-$0}")" || exit
 
