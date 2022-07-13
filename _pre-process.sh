@@ -3,11 +3,20 @@
 # description:
 #   correct directory or file name that begins with the underscore.
 
+set -x
+
+readonly PAGE=index.html
+readonly BACKUP_PREFIX=.tmp
+readonly ORIGINAL_ASSETS_DIRECTORY=_next
+readonly CORRECT_ASSETS_DIRECTORY=next
+
 cd "$(dirname "${BASH_SOURCE:-$0}")" || exit
 
-if [ -d _next ]; then
-  rm -rf next
-  mv _next next
+if [ -d ${ORIGINAL_ASSETS_DIRECTORY} ]; then
+  rm -rf ${CORRECT_ASSETS_DIRECTORY}
+  mv ${ORIGINAL_ASSETS_DIRECTORY} ${CORRECT_ASSETS_DIRECTORY}
+  sed -i ${BACKUP_PREFIX} 's#'"/${ORIGINAL_ASSETS_DIRECTORY}"'#'"${CORRECT_ASSETS_DIRECTORY}"'#g' ${PAGE}
+  rm -f ${PAGE}${BACKUP_PREFIX}
 fi
 
 while read -r path; do
@@ -18,6 +27,7 @@ while read -r path; do
 
     mv "${path}" "${correct_path}" 
 
-    sed -i index.html -e 's#'"${path}"'#'"${correct_path}"'#g'
+    sed -i ${BACKUP_PREFIX} 's#'"${path}"'#'"${correct_path}"'#g' ${PAGE}
+    rm -f ${PAGE}${BACKUP_PREFIX}
   fi
-done < <(find next -mindepth 1)
+done < <(find ${CORRECT_ASSETS_DIRECTORY} -mindepth 1)
